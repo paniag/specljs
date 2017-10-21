@@ -1,0 +1,29 @@
+{
+  "name": "specljs",
+  "version": "1.0.0",
+  "description": "SpecL is a Data Modeling, Data Validation, Data Transformation, Code Generation Thing-a-ma-jig",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datajango/specljs.git"
+  },
+  "keywords": [
+    "Data",
+    "Modeling",
+    "Data",
+    "Validation",
+    "Data",
+    "Transformation",
+    "Code",
+    "Generation"
+  ],
+  "author": "Anthony L. Leotta <thedatajango@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/datajango/specljs/issues"
+  },
+  "homepage": "https://github.com/datajango/specljs#readme"
+}
