@@ -1,0 +1,3 @@
+if [ -e "${HOME}/.zshrc.host" ]; then
+  source "${HOME}/.zshrc.host"
+fi

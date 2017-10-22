@@ -1,0 +1,4 @@
+.secret/
+**/.secret/
+vagrant/.vagrant/
+*.log

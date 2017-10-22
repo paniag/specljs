@@ -1,0 +1,39 @@
+require "etc"
+
+NCPUS = Etc.nprocessors / 2
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu/xenial64"
+  #config.vm.network :private_network, ip: "10.20.30.60"
+  # config.vm.synced_folder "../", "/opt/dev", :nfs => true, :create => true
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = 2048
+    vb.cpus = NCPUS
+  end
+  config.vm.provision :shell, :privileged => true do |s|
+    s.inline = "echo 'export NCPUS=$1' >> /etc/profile"
+    s.args = NCPUS
+  end
+  # TODO: Clean up these configs by defining standard vagrant configs
+  #   rather than just poaching from ${HOME}.
+  # bash
+  config.vm.provision :file, :source => "~/.bashrc", :destination => ".bashrc.host"
+  config.vm.provision :file, :source => "bashrc", :destination => ".bashrc"
+  # zsh
+  config.vm.provision :file, :source => "~/.zshrc", :destination => ".zshrc.host"
+  config.vm.provision :file, :source => "zshrc", :destination => ".zshrc"
+  # tmux
+  config.vm.provision :file, :source => "~/.tmux.conf", :destination => ".tmux.conf"
+  # vim
+  config.vm.provision :file, :source => "~/.vimrc", :destination => ".vimrc"
+  config.vm.provision :file, :source => "~/.vim", :destination => ".vim"
+  # git
+  config.vm.provision :file, :source => "~/.gitconfig", :destination => ".gitconfig"
+  config.vm.provision :file, :source => "~/.config/git/ignore", :destination => ".config/git/ignore"
+  # ssh
+  config.vm.provision :file, :source => "~/.ssh/identities/git", :destination => ".ssh/identities/git"
+  # Provision
+  config.vm.provision :shell, :keep_color => true, :path => "provision.sh", :privileged => false
+end

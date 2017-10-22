@@ -1,0 +1,24 @@
+alias d='git diff'
+alias dt='git difftool -t vimdiff'
+alias diff="colordiff"
+alias l="ls"
+alias la="l -A"
+alias ll="l -l"
+alias lla="ll -A"
+alias lm="ll /mnt"
+alias ls="ls --color=auto -h --group-directories-first --file-type"
+alias ts='date +%Y-%m-%d_%H:%M:%S.%N'
+alias up="cd .."
+
+###
+# Portable invocation for vim.
+#   In case we're running from another user account, call vim correctly
+alias vim="vim -u $MYVIMRC"
+alias vimro="vim -R"
+alias vimdiff="vim -d"
+
+# vim-related
+alias viped='vipe > /dev/null'
+
+# File extension aliases
+alias -s tex=vim

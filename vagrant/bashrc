@@ -1,0 +1,7 @@
+if [ -e "${HOME}/.bashrc.host" ]; then
+  source "${HOME}/.bashrc.host"
+fi
+
+if [ -e "${HOME}/.bashrc.local" ]; then
+  source "${HOME}/.bashrc.local"
+fi
