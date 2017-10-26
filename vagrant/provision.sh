@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 set -x
@@ -11,6 +11,7 @@ sudo apt-get install -y \
   bash \
   build-essential \
   curl \
+  expect \
   exuberant-ctags \
   g++ \
   gettext \
@@ -106,12 +107,25 @@ sudo ${MAKE} install install-doc
 
 
 #
+# Manually add a key to the agent.
+#
+eval $(ssh-agent -s)
+source ${HOME}/.ssh/identities/git/id_rsa.passphrase
+expect  < <(cat <<EOF
+  spawn ssh-add ${HOME}/.ssh/identities/git/id_rsa.pub
+  expect "Enter passphrase for ${HOME}/.ssh/id_rsa.pub: "
+  send "${GITHUB_RSA_PASSPHRASE}"
+EOF
+)
+
+
+#
 # ssh-ident
 #
 mkdir -p /opt/sw
 cd /opt/sw
 # TODO(epaniagua): Make this more robust, eg by using a submodule or a copy of the source for a specific version.
-git clone https://github.com/ccontavalli/ssh-ident.git
+git clone git@github.com:ccontavalli/ssh-ident.git
 cp /vagrant/ssh-ident "${HOME}/.ssh-ident"
 ln -s /opt/sw/ssh-ident/ssh-ident "${HOME}/bin/ssh"
 
